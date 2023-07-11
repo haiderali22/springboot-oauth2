@@ -62,11 +62,14 @@ function LoginInfo() {
     )
 }
 
+const oauthServerUrl = 'http://localhost:8080/auth';
+// const oauthServerUrl = 'http://localhost:8081';
+
 const authConfig = {
     clientId: 'web-client',
-    authorizationEndpoint: 'http://localhost:8080/auth/oauth2/authorize',
-    logoutEndpoint: 'http://localhost:8080/auth/logout',
-    tokenEndpoint: 'http://localhost:8080/auth/oauth2/token',
+    authorizationEndpoint: `${oauthServerUrl}/oauth2/authorize`,
+    logoutEndpoint: `${oauthServerUrl}/logout`,
+    tokenEndpoint: `${oauthServerUrl}/oauth2/token`,
     redirectUri: 'http://127.0.0.1:3000',
     scope: 'openid',
     // Example to redirect back to original path after login has completed
