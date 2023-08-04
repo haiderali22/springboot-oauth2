@@ -23,7 +23,6 @@ extra["springCloudVersion"] = "2022.0.3"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-oauth2-authorization-server")
-    implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery")
 //    implementation("org.springframework.boot:spring-boot-starter-security")
 //    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")

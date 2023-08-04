@@ -18,13 +18,16 @@ configurations {
 repositories {
     mavenCentral()
 }
+//
+//extra["spring-cloud-gateway.version"] = "1.7.20"
 
-extra["springCloudVersion"] = "2022.0.3"
+extra["springCloudVersion"] = "2022.0.4"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery")
     implementation("org.springframework.cloud:spring-cloud-starter-gateway")
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

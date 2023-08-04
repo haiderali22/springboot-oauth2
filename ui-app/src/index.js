@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, {useContext, useState} from 'react'
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import { AuthContext, AuthProvider, TAuthConfig, IAuthContext } from 'react-oauth2-code-pkce'
 
 function LoginInfo() {
+
+    // const [data,setData] = useState("");
+
    const { tokenData, token, login, logOut, idToken, error } = useContext(AuthContext)
     if (error) {
         return (
@@ -14,6 +17,25 @@ function LoginInfo() {
                 <button onClick={() => logOut()}>Logout</button>
             </>
         )
+    }
+
+    function setData(data){
+        document.getElementById("dataDisplay").innerHTML = JSON.stringify(data);
+    }
+
+    const gatewayUrl = "http://localhost:8080";
+
+    function callProductService() {
+        let  headers = {};
+        if(token){
+            headers = { 'Authorization': `Bearer ${token}` };
+        }
+
+        fetch(`${gatewayUrl}/product/`, { headers })
+            .then(response => response.json())
+            .then(data => setData(data)).catch(error => {
+            setData(error)
+        });
     }
 
     return (
@@ -51,6 +73,7 @@ function LoginInfo() {
             </pre>
                     </div>
                     <button onClick={() => logOut()}>Logout</button>
+
                 </>
             ) : (
                 <>
@@ -58,12 +81,28 @@ function LoginInfo() {
                     <button onClick={() => login()}>Login</button>
                 </>
             )}
+            <br/>
+            <button onClick={() => callProductService()}>Call Get Product</button>
+            <br/>
+            <label>Data</label>
+            <pre id={"dataDisplay"}
+                style={{
+                    width: '400px',
+                    margin: '10px',
+                    padding: '5px',
+                    border: 'black 2px solid',
+                    wordBreak: 'break-all',
+                    whiteSpace: 'break-spaces',
+                }}
+            >
+
+            </pre>
         </>
     )
 }
 
-const oauthServerUrl = 'http://localhost:8080/auth';
-// const oauthServerUrl = 'http://localhost:8081';
+// const oauthServerUrl = 'http://192.168.10.7:8080/auth';
+const oauthServerUrl = 'http://localhost:8081';
 
 const authConfig = {
     clientId: 'web-client',
